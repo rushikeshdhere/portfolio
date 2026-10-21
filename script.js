@@ -1,0 +1,21 @@
+const toggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.nav-links');
+if (toggle && nav) {
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+  });
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation');
+  }));
+}
+
+document.querySelectorAll('[data-placeholder]').forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    alert(`Add your ${link.dataset.placeholder} profile URL in index.html before publishing.`);
+  });
+});
